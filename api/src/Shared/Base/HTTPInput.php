@@ -1,18 +1,40 @@
 <?php
     namespace App\Shared\Base;
 
-    use Psr\Container\ContainerInterface;
-    use Slim\Http\Request;
-    use Slim\Http\Response;
-
+/**
+ * Base class for accepting HTTP requests to the app
+ * @author Marvin Isaac <misaac@pushnami.com>
+ */
 abstract class HTTPInput
 {
+    /**
+     * Instance of app container
+     * @access protected
+     * @var \Psr\Container\ContainerInterface
+     */
     protected $container;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * Child class requires an instance of the app container for internal dependencies
+     * @access public
+     * @param \Psr\Container\ContainerInterface $container
+     */
+    public function __construct(\Psr\Container\ContainerInterface $container)
     {
         $this->container = $container;
     }
 
-    abstract public function __invoke(Request $request, Response $response, array $args) : Response;
+    /**
+     * Entry point after Slim resolves a route and calls the route handler
+     * @access public
+     * @param \Slim\Http\Request $request
+     * @param \Slim\Http\Response $response
+     * @param array $args
+     * @return \Slim\Http\Response
+     */
+    abstract public function __invoke(
+        \Slim\Http\Request $request,
+        \Slim\Http\Response $response,
+        array $args
+    ) : \Slim\Http\Response;
 }

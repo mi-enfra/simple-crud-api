@@ -2,11 +2,20 @@
     // @codeCoverageIgnoreStart
     namespace App;
 
-    use Slim\App;
-    
+/**
+ * Set routes for the app
+ * @author Marvin Isaac <misaac@pushnami.com>
+ */
 final class Router
 {
-    public function set(App $app) : App
+    /**
+     * Configure routes for the app and add the handlers for each route. If needed, this is also where named
+     * routes are set.
+     * @access public
+     * @param \Slim\App $app
+     * @return \Slim\App
+     */
+    public function set(\Slim\App $app) : \Slim\App
     {
         $app->get('/health[/]', 'DefaultOkay');
 

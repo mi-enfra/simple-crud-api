@@ -2,13 +2,26 @@
     namespace App\DefaultForbidden;
 
     use App\Shared\Base\HTTPInput as BaseClass;
-    use Slim\Http\Request;
-    use Slim\Http\Response;
 
+/**
+ * Class to handle routes/requests that are not allowed or not yet implemented
+ * @author Marvin Isaac <misaac@pushnami.com>
+ */
 final class DefaultForbidden extends BaseClass
 {
-    public function __invoke(Request $request, Response $response, array $args) : Response
-    {
+    /**
+     * Overrides abstract method from base class. Returns a blank response with 403 HTTP status
+     * @access public
+     * @param \Slim\Http\Request $request
+     * @param \Slim\Http\Response $response
+     * @param array $args
+     * @return \Slim\Http\Response
+     */
+    public function __invoke(
+        \Slim\Http\Request $request,
+        \Slim\Http\Response $response,
+        array $args
+    ) : \Slim\Http\Response {
         return $response->withStatus(403);
     }
 }

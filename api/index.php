@@ -6,11 +6,10 @@
     use App\MiddlewareInjector;
     use App\Router;
     use App\Setting;
-    use Slim\App;
     
     Environment::setup();
     $setting = Setting::get();
-    $app = new App($setting);
+    $app = new \Slim\App($setting);
     
     $dependency = new DependencyInjector();
     $app = $dependency->inject($app);

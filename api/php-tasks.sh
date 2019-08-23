@@ -11,7 +11,7 @@ analyse () {
 
 commit () {
     cd "../"
-    git add backend/coverage-report.txt
+    git add api/coverage-report.txt
     git add private/env.example
 }
 

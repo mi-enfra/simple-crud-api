@@ -15,6 +15,7 @@ final class DependencyInjector
         $container['DefaultForbidden'] = function ($container) {
             return new DefaultForbidden($container);
         };
+
         $container['DefaultOkay'] = function ($container) {
             return new DefaultOkay($container);
         };

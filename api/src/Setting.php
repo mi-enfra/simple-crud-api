@@ -17,6 +17,10 @@ final class Setting
         return [
             'settings' => [
                 'addContentLengthHeader' => false,
+                'database' => [
+                    'driver' => 'sqlite',
+                    'database' => __DIR__ . '/../database/database.sqlite',
+                ],
                 'determineRouteBeforeAppMiddleware' => true,
                 'displayErrorDetails' => true,
             ],

@@ -17,6 +17,10 @@ final class Router
      */
     public function set(\Slim\App $app) : \Slim\App
     {
+        $app->group('/task/', function ($app) {
+            $app->map(['DELETE','GET', 'PATCH', 'POST'], '', 'Task');
+        });
+
         $app->get('/health[/]', 'DefaultOkay');
 
         $app->any('/[{path:.*}]', 'DefaultForbidden');

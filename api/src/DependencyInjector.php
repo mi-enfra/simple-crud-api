@@ -4,6 +4,7 @@
 
     use App\DefaultForbidden\DefaultForbidden;
     use App\DefaultOkay\DefaultOkay;
+    use App\Task\HTTP\Input as Task;
 
 /**
  * Add all dependencies required by the app
@@ -22,12 +23,24 @@ final class DependencyInjector
     {
         $container = $app->getContainer();
 
+        $capsule = new \Illuminate\Database\Capsule\Manager;
+        $capsule->addConnection($container->get('settings')['database']);
+        $capsule->setAsGlobal();
+        $capsule->bootEloquent();
+        $container['database'] = function ($container) use ($capsule) {
+            return $capsule;
+        };
+
         $container['DefaultForbidden'] = function ($container) {
             return new DefaultForbidden($container);
         };
 
         $container['DefaultOkay'] = function ($container) {
             return new DefaultOkay($container);
+        };
+
+        $container['Task'] = function ($container) {
+            return new Task($container);
         };
         
         return $app;

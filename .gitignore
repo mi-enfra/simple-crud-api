@@ -3,6 +3,9 @@ api/coverage-report/
 api/logs/
 api/metrics-report/
 api/vendor/
+frontend/.DS_Store
+frontent/dist/
+frontend/node_modules/
 *.env
-*.log
+*.log*
 *.wxtask

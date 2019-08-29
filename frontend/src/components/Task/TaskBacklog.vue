@@ -8,36 +8,26 @@
             </button>
         </div>
         <draggable class="card-container">
-            <task-card
+            <task-backlog-card
                 v-for="(task, index) in tasks"
-                v-bind:task="task"
-                v-bind:key="index"
-                v-on:editEnable="editEnable"
-                v-on:show="show">
-            </task-card>
+                v-bind:task_detail="task"
+                v-bind:key="index">
+            </task-backlog-card>
         </draggable>
     </div>
 </template>
 
 <script>
 import draggable from 'vuedraggable';
-import TaskCard from './TaskCard/TaskCard.vue';
+import TaskBacklogCard from './TaskBacklogCard.vue';
 
 export default {
     name: 'Backlog',
     components: {
         draggable,
-        TaskCard,
+        TaskBacklogCard,
     },
     props: ['tasks'],
-    methods: {
-        editEnable(id) {
-            this.$emit('editEnable', id);
-        },
-        show(id) {
-            this.$emit('show', id);
-        },
-    },
 };
 </script>
 

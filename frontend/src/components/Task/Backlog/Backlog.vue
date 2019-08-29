@@ -8,80 +8,39 @@
             </button>
         </div>
         <draggable class="card-container">
-            <div class="card is-clearfix"
+            <task-card
                 v-for="(task, index) in tasks"
                 v-bind:task="task"
-                v-bind:key="index">
-                <header class="card-header">
-                    <a href="#" class="card-header-icon"
-                        v-if="!task.is_editting"
-                        v-on:click="$emit('show', index)">
-                        <font-awesome-icon icon="chevron-down"
-                            :flip="task.is_shown ? 'vertical' : ''">
-                        </font-awesome-icon>
-                    </a>
-                    <p class="card-header-title">
-                        <input class="input" :disabled="!task.is_editting"
-                            v-model="task.title">
-                    </p>
-                    <a href="#" class="card-header-icon"
-                        v-on:click="$emit('edit', index)">
-                        <font-awesome-icon icon="edit"></font-awesome-icon>
-                    </a>
-                </header>
-                <div class="card-content"
-                    v-if="task.is_editting || task.is_shown">
-                    <div class="content">
-                        <textarea class="textarea" :disabled="!task.is_editting"
-                            v-model="task.description">
-                        </textarea>
-                    </div>
-                </div>
-            </div>
+                v-bind:key="index"
+                v-on:edit="edit"
+                v-on:show="show">
+            </task-card>
         </draggable>
     </div>
 </template>
 
 <script>
 import draggable from 'vuedraggable';
+import TaskCard from './TaskCard/TaskCard.vue';
 
 export default {
     name: 'Backlog',
     components: {
         draggable,
+        TaskCard,
     },
     props: ['tasks'],
+    methods: {
+        edit(id) {
+            this.$emit('edit', id);
+        },
+        show(id) {
+            console.log(id);
+            this.$emit('show', id);
+        },
+    },
 };
 </script>
-
-<style scoped lang="scss">
-    .card {
-        .card-header {
-            .card-header-icon:first-of-type {
-                color: initial;
-            }
-            p input:disabled {
-                background: initial;
-                border: none;
-                color: initial;
-                cursor: default;
-                font: inherit;
-            }
-        }
-        .card-content {
-            .content textarea:disabled {
-                background: initial;
-                border: none;
-                box-shadow: none;
-                color: initial;
-                cursor: initial;
-                font: inherit;
-                overflow-x: hidden;
-                overflow-y: auto;
-            }
-        }
-    }
-</style>
 
 <style scoped lang="scss">
     .card-container {

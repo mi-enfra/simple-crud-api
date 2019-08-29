@@ -5,7 +5,10 @@
                 v-if="!task.is_editting"
                 v-on:click="$emit('show', task.id)">
                 <font-awesome-icon icon="chevron-down"
-                    :flip="task.is_shown ? 'vertical' : ''">
+                    v-if="!task.is_shown">
+                </font-awesome-icon>
+                <font-awesome-icon icon="chevron-up"
+                    v-else>
                 </font-awesome-icon>
             </a>
             <p class="card-header-title">
@@ -13,7 +16,7 @@
                     v-model="task.title">
             </p>
             <a href="#" class="card-header-icon"
-                v-on:click="$emit('edit', task.id)">
+                v-on:click="$emit('editEnable', task.id)">
                 <font-awesome-icon icon="edit"></font-awesome-icon>
             </a>
         </header>

@@ -19,10 +19,10 @@ export default {
             title: 'Dolor',
             description: 'Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).',
             is_editting: false,
-            is_shown: true,
+            is_shown: false,
         },
     ],
-    edit(id) {
+    editEnable(id) {
         const index = this.list.findIndex(task => task.id === id);
         this.list[index].is_editting = !this.list[index].is_editting;
     },

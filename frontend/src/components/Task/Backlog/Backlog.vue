@@ -12,7 +12,7 @@
                 v-for="(task, index) in tasks"
                 v-bind:task="task"
                 v-bind:key="index"
-                v-on:edit="edit"
+                v-on:editEnable="editEnable"
                 v-on:show="show">
             </task-card>
         </draggable>
@@ -31,11 +31,10 @@ export default {
     },
     props: ['tasks'],
     methods: {
-        edit(id) {
-            this.$emit('edit', id);
+        editEnable(id) {
+            this.$emit('editEnable', id);
         },
         show(id) {
-            console.log(id);
             this.$emit('show', id);
         },
     },

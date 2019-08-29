@@ -5,7 +5,7 @@
             <div class="column is-4">
                 <Backlog
                     v-bind:tasks="tasks.list"
-                    v-on:edit="edit"
+                    v-on:editEnable="editEnable"
                     v-on:show="show">
                     </Backlog>
             </div>
@@ -34,8 +34,8 @@ export default {
         };
     },
     methods: {
-        edit(id) {
-            TaskStore.edit(id);
+        editEnable(id) {
+            TaskStore.editEnable(id);
         },
         show(id) {
             TaskStore.show(id);

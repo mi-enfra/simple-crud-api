@@ -12,6 +12,15 @@ export default {
     name: 'App',
     components: {
         Navigation
+    },
+    watch: {
+        $route (to, from) {
+            let title = 'Marvin\'s Laboratory'
+            if (to.meta.title !== undefined || to.meta.title !== '') {
+                title += ' | ' + to.meta.title
+            }
+            document.title = title
+        }
     }
 }
 </script>

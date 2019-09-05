@@ -26,6 +26,16 @@ export default new Router(
                 meta: {
                     title: 'About'
                 }
+            }, {
+                path: '/task',
+                name: 'task',
+                component: () => import(
+                    /* webpackChunkName: "task" */
+                    './Pages/Task/Task.vue'
+                ),
+                meta: {
+                    title: 'Task'
+                }
             }
         ]
     }

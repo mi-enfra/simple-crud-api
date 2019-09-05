@@ -1,9 +1,9 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="/assets/images/logo.png"
-        v-on:click="camelcaseTest()">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="container">
+        <img alt="Vue logo" src="/assets/images/logo.png"
+            v-on:click="camelcaseTest()">
+        <HelloWorld msg="Welcome to Your Vue.js App"/>
+    </div>
 </template>
 
 <script>

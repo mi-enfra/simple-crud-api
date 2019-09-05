@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <navigation v-bind:navigation-links="this.links"></navigation>
-        <router-view></router-view>
+        <router-view class="section"></router-view>
     </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
                     destination: '/'
                 }, {
                     text: 'Tasks',
-                    destination: '/'
+                    destination: '/task'
                 }, {
                     text: 'About',
                     destination: '/about'

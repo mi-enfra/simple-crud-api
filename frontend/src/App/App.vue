@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <navigation></navigation>
+        <navigation v-bind:navigation-links="this.links"></navigation>
         <router-view></router-view>
     </div>
 </template>
@@ -13,6 +13,22 @@ export default {
     components: {
         Navigation
     },
+    data () {
+        return {
+            links: [
+                {
+                    text: 'Home',
+                    destination: '/'
+                }, {
+                    text: 'Tasks',
+                    destination: '/'
+                }, {
+                    text: 'About',
+                    destination: '/about'
+                }
+            ]
+        }
+    },
     watch: {
         $route (to, from) {
             let title = 'Marvin\'s Laboratory'
@@ -24,23 +40,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-#app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-}
-#nav {
-    padding: 30px;
-    a {
-        font-weight: bold;
-        color: #2c3e50;
-        &.router-link-exact-active {
-        color: #42b983;
-        }
-    }
-}
-</style>

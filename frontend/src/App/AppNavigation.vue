@@ -1,22 +1,62 @@
 <template>
-    <div id="nav" class="buttons">
-        <router-link to="/" class="button">Home</router-link>
-        <router-link to="/about" class="button">About</router-link>
-    </div>
+    <nav class="navbar is-light">
+        <div class="container">
+            <div class="navbar-brand">
+                <router-link to="/" class="navbar-item">
+                    <img src="/assets/images/logo.png">
+                </router-link>
+                <a role="button" class="navbar-burger burger"
+                    v-bind:class="{'is-active': showMobileNavbar}"
+                    v-on:click = "toggleMobileNavbar()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+            </div>
+            <div id="navbarBasicExample" class="navbar-menu"
+                v-bind:class="{'is-active': showMobileNavbar}">
+                <div class="navbar-start">
+                    <router-link class="navbar-item"
+                        v-for="(link, index) in this.navigationLinks"
+                        v-bind:key="index"
+                        v-bind:to="link.destination"
+                        v-on:click.native="hideMobileNavbar()">
+                        {{ link.text }}
+                    </router-link>
+                </div>
+            </div>
+        </div>
+    </nav>
 </template>
 
 <script>
 export default {
-    name: 'Navigation'
+    name: 'Navigation',
+    props: {
+        navigationLinks: Array
+    },
+    data () {
+        return {
+            showMobileNavbar: false
+        }
+    },
+    methods: {
+        toggleMobileNavbar () {
+            this.showMobileNavbar = !this.showMobileNavbar
+        },
+        hideMobileNavbar () {
+            this.showMobileNavbar = false
+        }
+    }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../../node_modules/bulma/bulma.sass';
-
-#nav {
+.navbar {
+    position: sticky;
+    top: 0;
     .router-link-exact-active {
-        @extend .is-success
+        font-weight: bolder;
     }
 }
 </style>

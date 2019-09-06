@@ -22,3 +22,9 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.container {
+    text-align: center;
+}
+</style>

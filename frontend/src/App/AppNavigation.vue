@@ -55,8 +55,19 @@ export default {
 .navbar {
     position: sticky;
     top: 0;
-    .router-link-exact-active {
-        font-weight: bolder;
+    .container {
+        .navbar-start {
+            .navbar-item {
+                text-align: center;
+            }
+            .router-link-exact-active {
+                font-weight: bolder;
+            }
+        }
+        .navbar-menu.is-active {
+            position: absolute;
+            width: 100%;
+        }
     }
 }
 </style>

@@ -17,6 +17,16 @@ export default new Router(
                     title: 'Home'
                 }
             }, {
+                path: '/project-euler',
+                name: 'project-euler',
+                component: () => import(
+                    /* webpackChunkName: "project-euler" */
+                    './Pages/ProjectEuler/ProjectEuler.vue'
+                ),
+                meta: {
+                    title: 'Project Euler'
+                }
+            }, {
                 path: '/about',
                 name: 'about',
                 component: () => import(

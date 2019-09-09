@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-        <h2 class="title is-size-6">Multiples of 3 and 5</h2>
+        <h2 class="title is-size-6">#1 Multiples of 3 and 5</h2>
         <p>Example: {{ solution(10) }}</p>
         <p>Solution: {{ solution(1000) }}</p>
     </div>

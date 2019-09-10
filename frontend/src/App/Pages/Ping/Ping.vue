@@ -1,9 +1,9 @@
 <template>
     <div class="container">
         <chart
-            v-if="this.chartData.datasets[0].data.length > 0"
-            v-bind:data="this.chartData.datasets[0].data"
-            v-bind:labels="this.chartData.labels">
+            v-if="this.googleData.length > 0"
+            v-bind:google-data="this.googleData"
+            v-bind:labels="this.labels">
         </chart>
     </div>
 </template>
@@ -21,16 +21,8 @@ export default {
         return {
             Ping: new Ping(),
             counter: 0,
-            chartData: {
-                labels: [],
-                datasets: [
-                    {
-                        label: 'Google Ping',
-                        backgroundColor: '#000',
-                        data: []
-                    }
-                ]
-            }
+            labels: [],
+            googleData: []
         }
     },
     created () {
@@ -39,11 +31,15 @@ export default {
     methods: {
         runPing () {
             this.Ping.ping('https://google.com', (err, data) => {
-                if (err) {
-                    data = data + ' ' + err
+                let limit = 120
+                if (err) {}
+                if (this.counter <= limit) {
+                    this.labels.splice(0, 0, this.counter++)
                 }
-                this.chartData.labels.push(this.counter++)
-                this.chartData.datasets[0].data.push(data)
+                if (this.googleData.length > limit) {
+                    this.googleData.shift()
+                }
+                this.googleData.push(data)
             })
         }
     }

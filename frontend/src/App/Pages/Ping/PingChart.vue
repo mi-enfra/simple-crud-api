@@ -4,8 +4,8 @@ import { Line } from 'vue-chartjs'
 export default {
     extends: Line,
     props: {
-        data: Array,
-        labels: Array
+        labels: Array,
+        googleData: Array
     },
     data () {
         return {
@@ -13,20 +13,22 @@ export default {
                 labels: this.labels,
                 datasets: [
                     {
+                        data: this.googleData,
+                        backgroundColor: 'transparent',
+                        borderColor: '#000',
                         label: 'Google Ping',
-                        backgroundColor: '#000',
-                        data: this.data
+                        pointRadius: 0
                     }
                 ]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                responsive: true
             }
         }
     },
     watch: {
-        data () {
+        googleData () {
             this.$data._chart.update()
         }
     },

@@ -28,6 +28,9 @@ export default {
                 }, {
                     text: 'About',
                     destination: '/about'
+                }, {
+                    text: 'Ping',
+                    destination: '/ping'
                 }
             ]
         }

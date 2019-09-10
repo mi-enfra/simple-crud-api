@@ -46,6 +46,16 @@ export default new Router(
                 meta: {
                     title: 'Task'
                 }
+            }, {
+                path: '/ping',
+                name: 'ping',
+                component: () => import(
+                    /* webpackChunkName: "ping" */
+                    './Pages/Ping/Ping.vue'
+                ),
+                meta: {
+                    title: 'Ping'
+                }
             }
         ]
     }

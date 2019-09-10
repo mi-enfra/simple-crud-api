@@ -1,12 +1,12 @@
 
 
 Code Coverage Report:     
-  2019-09-09 19:06:48     
+  2019-09-10 22:29:29     
                           
  Summary:                 
-  Classes:  0.00% (0/9)   
-  Methods:  0.00% (0/15)  
-  Lines:   11.92% (18/151)
+  Classes:  0.00% (0/10)  
+  Methods:  0.00% (0/16)  
+  Lines:   11.18% (18/161)
 
 \App\Kata\BinarySearch::App\Kata\BinarySearch\BinarySearch
   Methods:   0.00% ( 0/ 1)   Lines:  90.00% ( 18/ 20)

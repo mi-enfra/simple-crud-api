@@ -56,6 +56,16 @@ export default new Router(
                 meta: {
                     title: 'Ping'
                 }
+            }, {
+                path: '/bookmark',
+                name: 'bookmark',
+                component: () => import(
+                    /* webpackChunkName: "bookmark" */
+                    './Pages/Bookmark/Bookmark.vue'
+                ),
+                meta: {
+                    title: 'Bookmark'
+                }
             }
         ]
     }

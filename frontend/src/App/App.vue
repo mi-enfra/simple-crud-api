@@ -20,6 +20,9 @@ export default {
                     text: 'Home',
                     destination: '/'
                 }, {
+                    text: 'Bookmarks',
+                    destination: '/bookmark'
+                }, {
                     text: 'Project Euler',
                     destination: '/project-euler'
                 }, {

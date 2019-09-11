@@ -5,6 +5,7 @@ export default {
     extends: Line,
     props: {
         labels: Array,
+        awsData: Array,
         googleData: Array
     },
     data () {
@@ -14,10 +15,16 @@ export default {
                 datasets: [
                     {
                         data: this.googleData,
-                        backgroundColor: '#fff',
-                        borderColor: '#000',
-                        fill: true,
-                        label: 'Google Ping',
+                        backgroundColor: 'transparent',
+                        borderColor: '#4285f4',
+                        label: 'Google',
+                        pointRadius: 0,
+                        steppedLine: 'middle'
+                    }, {
+                        data: this.awsData,
+                        backgroundColor: 'transparent',
+                        borderColor: '#fd9827',
+                        label: 'AWS',
                         pointRadius: 0,
                         steppedLine: 'middle'
                     }
@@ -56,6 +63,9 @@ export default {
         }
     },
     watch: {
+        awsData () {
+            this.$data._chart.update()
+        },
         googleData () {
             this.$data._chart.update()
         }

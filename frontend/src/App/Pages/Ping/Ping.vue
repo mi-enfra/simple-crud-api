@@ -1,10 +1,24 @@
 <template>
-    <div class="container">
-        <chart
-            v-if="this.googleData.length > 0"
-            v-bind:google-data="this.googleData"
-            v-bind:labels="this.labels">
-        </chart>
+    <div>
+        <div class="columns">
+            <div class="column is-1">
+                <div class="field">
+                    <label class="label">Limit (secs)</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Limit in seconds"
+                            v-model="limit">
+                    </div>
+                        <p class="help">{{ limit / 60 }} mins</p>
+                </div>
+            </div>
+            <div class="column is-11">
+                <chart
+                    v-if="this.googleData.length > 0"
+                    v-bind:google-data="this.googleData"
+                    v-bind:labels="this.labels">
+                </chart>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -22,7 +36,8 @@ export default {
             Ping: new Ping(),
             counter: 0,
             labels: [],
-            googleData: []
+            googleData: [],
+            limit: 120
         }
     },
     created () {
@@ -31,12 +46,13 @@ export default {
     methods: {
         runPing () {
             this.Ping.ping('https://google.com', (err, data) => {
-                let limit = 120
-                if (err) {}
-                if (this.counter <= limit) {
+                if (err) {
+                    data = -1000
+                }
+                if (this.counter <= this.limit) {
                     this.labels.splice(0, 0, this.counter++)
                 }
-                if (this.googleData.length > limit) {
+                if (this.googleData.length > this.limit) {
                     this.googleData.shift()
                 }
                 this.googleData.push(data)

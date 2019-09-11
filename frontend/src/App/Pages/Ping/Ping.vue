@@ -19,8 +19,7 @@
             </div>
             <div class="column is-11">
                 <chart
-                    v-if="this.awsData.length > 0 || this.googleData.length > 0"
-                    v-bind:aws-data="this.awsData"
+                    v-if="this.googleData.length > 0"
                     v-bind:google-data="this.googleData"
                     v-bind:labels="this.labels">
                 </chart>
@@ -43,7 +42,6 @@ export default {
             Ping: new Ping(),
             counter: 0,
             labels: [],
-            awsData: [],
             googleData: [],
             limit: 120
         }
@@ -65,23 +63,11 @@ export default {
                 }
                 this.googleData.push(data)
             })
-            this.Ping.ping('https://aws.amazon.com', (err, data) => {
-                if (err) {
-                    data = -100
-                }
-                if (this.awsData.length > this.limit) {
-                    this.awsData.shift()
-                }
-                this.awsData.push(data)
-            })
-            console.log(this.awsData.length)
-            console.log(this.googleData.length)
         },
         clearHistory () {
             this.counter = 0
             this.labels = []
             this.googleData = []
-            this.awsData = []
         }
     }
 }

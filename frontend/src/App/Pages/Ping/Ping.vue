@@ -10,6 +10,12 @@
                     </div>
                         <p class="help">{{ limit / 60 }} mins</p>
                 </div>
+                <div class="field">
+                    <button class="button is-danger is-small"
+                        v-on:click="clearHistory()">
+                        Clear History
+                    </button>
+                </div>
             </div>
             <div class="column is-11">
                 <chart
@@ -47,7 +53,7 @@ export default {
         runPing () {
             this.Ping.ping('https://google.com', (err, data) => {
                 if (err) {
-                    data = -1000
+                    data = -100
                 }
                 if (this.counter <= this.limit) {
                     this.labels.splice(0, 0, this.counter++)
@@ -57,6 +63,11 @@ export default {
                 }
                 this.googleData.push(data)
             })
+        },
+        clearHistory () {
+            this.counter = 0
+            this.labels = []
+            this.googleData = []
         }
     }
 }

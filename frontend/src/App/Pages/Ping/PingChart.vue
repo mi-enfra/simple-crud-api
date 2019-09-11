@@ -14,16 +14,44 @@ export default {
                 datasets: [
                     {
                         data: this.googleData,
-                        backgroundColor: 'transparent',
+                        backgroundColor: '#fff',
                         borderColor: '#000',
+                        fill: true,
                         label: 'Google Ping',
-                        pointRadius: 0
+                        pointRadius: 0,
+                        steppedLine: 'middle'
                     }
                 ]
             },
             options: {
                 maintainAspectRatio: false,
-                responsive: true
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Seconds ago'
+                        },
+                        ticks: {
+                            callback: function (dataLabel, index) {
+                                return index % 10 === 0 ? dataLabel : ''
+                            }
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Ping in ms'
+                        },
+                        ticks: {
+                            stepSize: 100,
+                            suggestedMin: 0,
+                            suggestedMax: 200
+                        }
+                    }]
+                }
             }
         }
     },

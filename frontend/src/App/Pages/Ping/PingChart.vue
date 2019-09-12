@@ -14,8 +14,10 @@ export default {
                 datasets: [
                     {
                         data: this.googleData,
-                        backgroundColor: 'transparent',
+                        backgroundColor: '#4285f4',
                         borderColor: '#4285f4',
+                        borderWidth: 2,
+                        fill: false,
                         label: 'Google',
                         pointRadius: 0,
                         steppedLine: 'middle'
@@ -45,9 +47,7 @@ export default {
                             labelString: 'Ping in ms'
                         },
                         ticks: {
-                            stepSize: 100,
-                            suggestedMin: 0,
-                            suggestedMax: 200
+                            stepSize: 10,
                         }
                     }]
                 }

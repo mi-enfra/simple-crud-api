@@ -8,7 +8,7 @@
                         <input class="input" type="text" placeholder="Limit in seconds"
                             v-model="limit">
                     </div>
-                        <p class="help">{{ limit / 60 }} mins</p>
+                        <p class="help">Or {{ limit / 60 }} min(s)</p>
                 </div>
                 <div class="field">
                     <button class="button is-danger is-small"
@@ -31,6 +31,7 @@
 <script>
 import Ping from 'ping.js'
 import Chart from './PingChart'
+import { debounce } from 'debounce'
 
 export default {
     name: 'Ping',
@@ -40,7 +41,6 @@ export default {
     data () {
         return {
             Ping: new Ping(),
-            counter: 0,
             labels: [],
             googleData: [],
             limit: 120
@@ -48,26 +48,46 @@ export default {
     },
     created () {
         setInterval(this.runPing, 1000)
+        while (this.googleData.length <= this.limit) {
+            this.googleData.splice(0, 0, 0)
+            this.labels.splice(0, 0, this.googleData.length - 1)
+        }
     },
     methods: {
         runPing () {
-            if (this.counter <= this.limit) {
-                this.labels.splice(0, 0, this.counter++)
-            }
             this.Ping.ping('https://www.google.com', (err, data) => {
-                if (err) {
-                    data = -100
-                }
-                if (this.googleData.length > this.limit) {
-                    this.googleData.shift()
-                }
+                if (err) { data = -100 }
+                if (this.googleData.length > this.limit) { this.googleData.shift() }
                 this.googleData.push(data)
             })
         },
         clearHistory () {
-            this.counter = 0
-            this.labels = []
-            this.googleData = []
+            this.googleData.forEach((ping, index) => {
+                this.googleData[index] = 0
+            })
+        },
+        updateLimit:
+            debounce(function () {
+                let limit = parseInt(this.limit)
+                if (limit > this.googleData.length) {
+                    while (this.googleData.length < limit) {
+                        this.googleData.splice(0, 0, 0)
+                        this.labels.splice(0, 0, this.googleData.length)
+                    }
+                }
+                if (limit < this.googleData.length) {
+                    while (this.googleData.length > limit + 1) {
+                        this.googleData.shift()
+                    }
+                    while (this.labels.length > limit + 1) {
+                        this.labels.shift()
+                    }
+                }
+            }, 500)
+    },
+    watch: {
+        limit () {
+            this.updateLimit()
         }
     }
 }

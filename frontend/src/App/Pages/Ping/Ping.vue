@@ -16,6 +16,12 @@
                         Clear History
                     </button>
                 </div>
+                <h1 class="is-size-4">Stats</h1>
+                <ul>
+                    <li>Average: {{ this.stats.average }}ms</li>
+                    <li>Highest: {{ this.stats.highest }}ms</li>
+                    <li>Lowest: {{ this.stats.lowest }}ms</li>
+                </ul>
             </div>
             <div class="column is-11">
                 <chart
@@ -43,7 +49,12 @@ export default {
             Ping: new Ping(),
             labels: [],
             googleData: [],
-            limit: 120
+            limit: 300,
+            stats: {
+                average: 0,
+                highest: 0,
+                lowest: 0
+            }
         }
     },
     created () {
@@ -88,6 +99,27 @@ export default {
     watch: {
         limit () {
             this.updateLimit()
+        },
+        googleData () {
+            let total = 0
+            let count = 0
+            let highest = 0
+            let lowest = 1000
+            this.googleData.forEach((ping, index) => {
+                if (ping !== 0) {
+                    total += ping
+                    count++
+                }
+                if (ping > highest) {
+                    highest = ping
+                }
+                if (ping !== 0 && ping < lowest) {
+                    lowest = ping
+                }
+            })
+            this.stats.average = (total / count).toFixed(0)
+            this.stats.highest = highest
+            this.stats.lowest = lowest
         }
     }
 }

@@ -47,7 +47,7 @@ export default {
                             labelString: 'Ping in ms'
                         },
                         ticks: {
-                            stepSize: 10,
+                            stepSize: 10
                         }
                     }]
                 }

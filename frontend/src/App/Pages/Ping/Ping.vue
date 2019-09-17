@@ -24,7 +24,7 @@
                 </ul>
             </div>
             <div class="column is-11">
-                <chart
+                <chart id="chart"
                     v-if="this.googleData.length > 0"
                     v-bind:google-data="this.googleData"
                     v-bind:labels="this.labels">
@@ -60,21 +60,21 @@ export default {
     created () {
         setInterval(this.runPing, 1000)
         while (this.googleData.length <= this.limit) {
-            this.googleData.splice(0, 0, 0)
+            this.googleData.splice(0, 0, NaN)
             this.labels.splice(0, 0, this.googleData.length - 1)
         }
     },
     methods: {
         runPing () {
             this.Ping.ping('https://www.google.com', (err, data) => {
-                if (err) { data = -100 }
+                if (err) { data = -1000 }
                 if (this.googleData.length > this.limit) { this.googleData.shift() }
                 this.googleData.push(data)
             })
         },
         clearHistory () {
             this.googleData.forEach((ping, index) => {
-                this.googleData[index] = 0
+                this.googleData[index] = NaN
             })
         },
         updateLimit:
@@ -82,7 +82,7 @@ export default {
                 let limit = parseInt(this.limit)
                 if (limit > this.googleData.length) {
                     while (this.googleData.length < limit) {
-                        this.googleData.splice(0, 0, 0)
+                        this.googleData.splice(0, 0, NaN)
                         this.labels.splice(0, 0, this.googleData.length)
                     }
                 }
@@ -106,7 +106,7 @@ export default {
             let highest = 0
             let lowest = 1000
             this.googleData.forEach((ping, index) => {
-                if (ping !== 0) {
+                if (ping > 0) {
                     total += ping
                     count++
                 }
@@ -124,3 +124,16 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.columns {
+    height: 100%;
+    .column {
+        height: 100%;
+        #chart {
+            height: 100%;
+            position: relative;
+        }
+    }
+}
+</style>

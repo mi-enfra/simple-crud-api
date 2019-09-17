@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar is-light">
+    <nav class="navbar is-fixed-top is-light">
         <div class="container">
             <div class="navbar-brand">
                 <router-link to="/" class="navbar-item">

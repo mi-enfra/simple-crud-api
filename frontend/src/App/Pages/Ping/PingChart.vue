@@ -25,6 +25,7 @@ export default {
                 ]
             },
             options: {
+                aspectRation: 1,
                 maintainAspectRatio: false,
                 responsive: true,
                 scales: {
@@ -45,9 +46,6 @@ export default {
                         scaleLabel: {
                             display: true,
                             labelString: 'Ping in ms'
-                        },
-                        ticks: {
-                            stepSize: 10
                         }
                     }]
                 }
